@@ -13,16 +13,16 @@
 }
 
 .nixie-digit-active {
-  font-family: 'Courier New', 'Consolas', monospace;
+  font-family: 'Baloo 2', 'Comic Sans MS', cursive, sans-serif;
   text-shadow:
-    0 0 3px #ff4500,
-    0 0 5px #ff4500,
-    0 0 8px #ff2200;
+    0 0 3px #ff5e00,
+    0 0 5px #ff5e00,
+    0 0 8px #ff4500;
   animation: digitGlow 2s ease-in-out infinite alternate;
 }
 
 .nixie-digit-wire {
-  font-family: 'Courier New', 'Consolas', monospace;
+  font-family: 'Baloo 2', 'Comic Sans MS', cursive, sans-serif;
 }
 
 .nixie-value-label {
@@ -68,7 +68,7 @@
 /* Add subtle animation on value change */
 .nixie-container:hover .nixie-digit-active {
   text-shadow:
-    0 0 4px #ff4500,
-    0 0 6px #ff4500,
-    0 0 10px #ff2200;
+    0 0 4px #ff5e00,
+    0 0 6px #ff5e00,
+    0 0 10px #ff4500;
 }

@@ -1,5 +1,5 @@
 {
-  "name": "react-toggles",
+  "name": "toggle-nixie",
   "version": "1.0.0",
   "description": "Interactive React SPA demonstrating toggle switches and Nixie tube display",
   "type": "module",

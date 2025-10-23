@@ -111,7 +111,7 @@ function App() {
         <p>
           Built with React, HTML5, CSS3, and SVG |
           <a
-            href="https://github.com/wrightmikea/react-toggles"
+            href="https://github.com/wrightmikea/toggle-nixie"
             target="_blank"
             rel="noopener noreferrer"
           >

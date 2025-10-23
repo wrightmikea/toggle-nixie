@@ -147,7 +147,7 @@ const NixieTube = ({ value }) => {
           fontWeight="normal"
           textAnchor="middle"
           fill="none"
-          stroke="#ff4500"
+          stroke="#ff5e00"
           strokeWidth="1.5"
           filter="url(#nixieGlow)"
         >

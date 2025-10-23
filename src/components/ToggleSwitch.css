@@ -51,14 +51,22 @@
   fill: #ffffff;
   stroke: #e2e8f0;
   stroke-width: 2;
-  transition: cy 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: cy 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.2s ease-out;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.toggle-knob.preview {
+  transform: translateY(calc(var(--preview-offset) * 1px));
 }
 
 .toggle-knob-highlight {
   fill: rgba(255, 255, 255, 0.8);
-  transition: cy 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: cy 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.2s ease-out;
   filter: blur(2px);
+}
+
+.toggle-knob-highlight.preview {
+  transform: translateY(calc(var(--preview-offset) * 1px));
 }
 
 .toggle-text {

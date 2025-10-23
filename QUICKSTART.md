@@ -1,6 +1,6 @@
 # Quick Start Guide
 
-Get up and running with React Toggles in under 2 minutes!
+Get up and running with Toggle Nixie in under 2 minutes!
 
 ## Installation
 
@@ -19,8 +19,8 @@ Visit `http://localhost:5173/` in your browser.
 ## How to Use
 
 1. **Click Toggle Switches**: Click on the **opposite side** of any toggle to change its state
-   - When switch is OFF (left), click the **right side** to turn ON
-   - When switch is ON (right), click the **left side** to turn OFF
+   - When switch is OFF (down at 0), click the **top** to turn ON
+   - When switch is ON (up at 1), click the **bottom** to turn OFF
 
 2. **Watch the Display**: The Nixie tube automatically updates to show the hex value (0-F)
 

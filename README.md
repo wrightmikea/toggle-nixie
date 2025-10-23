@@ -1,8 +1,8 @@
-# React Toggles
+# Toggle Nixie
 
 An interactive React Single Page Application (SPA) demonstrating graphical toggle switches that control a binary-to-hexadecimal converter with a vintage Nixie tube display.
 
-![React Toggles Demo](https://img.shields.io/badge/React-18.3-blue) ![Vite](https://img.shields.io/badge/Vite-5.4-purple) ![Tests](https://img.shields.io/badge/Tests-30%20Passing-green)
+![Toggle Nixie Demo](https://img.shields.io/badge/React-18.3-blue) ![Vite](https://img.shields.io/badge/Vite-5.4-purple) ![Tests](https://img.shields.io/badge/Tests-30%20Passing-green)
 
 ## Overview
 
@@ -57,10 +57,10 @@ This proof-of-concept application showcases:
 
 ```bash
 # Clone the repository
-git clone https://github.com/wrightmikea/react-toggles.git
+git clone https://github.com/wrightmikea/toggle-nixie.git
 
 # Navigate to the project directory
-cd react-toggles
+cd toggle-nixie
 
 # Install dependencies
 npm install
@@ -123,7 +123,7 @@ npm run test:coverage
 ## Project Structure
 
 ```
-react-toggles/
+toggle-nixie/
 ├── src/
 │   ├── components/
 │   │   ├── ToggleSwitch.jsx       # Toggle switch component

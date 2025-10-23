@@ -115,7 +115,10 @@ const ToggleSwitch = ({ isOn, onToggle, value }) => {
           cx="30"
           cy={isOn ? 35 : 85}
           r="18"
-          className="toggle-knob"
+          className={`toggle-knob ${hoverSide ? 'preview' : ''}`}
+          style={{
+            '--preview-offset': hoverSide ? (isOn ? '20' : '-20') : '0'
+          }}
         />
 
         {/* Inner knob highlight for 3D effect */}
@@ -123,7 +126,10 @@ const ToggleSwitch = ({ isOn, onToggle, value }) => {
           cx="30"
           cy={isOn ? 32 : 82}
           r="10"
-          className="toggle-knob-highlight"
+          className={`toggle-knob-highlight ${hoverSide ? 'preview' : ''}`}
+          style={{
+            '--preview-offset': hoverSide ? (isOn ? '20' : '-20') : '0'
+          }}
         />
       </svg>
     </div>
