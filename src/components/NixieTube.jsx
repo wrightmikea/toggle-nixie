@@ -4,7 +4,7 @@ import './NixieTube.css';
  * NixieTube Component
  *
  * Displays a hexadecimal digit (0-F) in a retro Nixie tube style
- * with authentic orange-red glow effect.
+ * with authentic orange-red glow effect and wire-like digits.
  *
  * @param {Object} props
  * @param {number} props.value - Numeric value (0-15) to display as hex
@@ -12,6 +12,29 @@ import './NixieTube.css';
 const NixieTube = ({ value }) => {
   // Convert numeric value to hex character (0-9, A-F)
   const hexChar = value.toString(16).toUpperCase();
+
+  // All hex digits
+  const allDigits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'];
+
+  // Position offsets for depth effect (some in front, some behind)
+  const digitOffsets = [
+    { x: -3, y: -2, z: 0 },   // 0
+    { x: 2, y: 1, z: 1 },     // 1
+    { x: -1, y: 2, z: -1 },   // 2
+    { x: 3, y: -1, z: 0 },    // 3
+    { x: -2, y: 1, z: 1 },    // 4
+    { x: 1, y: -2, z: -1 },   // 5
+    { x: 2, y: 2, z: 0 },     // 6
+    { x: -2, y: -1, z: 1 },   // 7
+    { x: 0, y: 2, z: -1 },    // 8
+    { x: 3, y: 0, z: 0 },     // 9
+    { x: -3, y: 1, z: 1 },    // A
+    { x: 1, y: -1, z: -1 },   // B
+    { x: -1, y: 0, z: 0 },    // C
+    { x: 2, y: -2, z: 1 },    // D
+    { x: -2, y: 2, z: -1 },   // E
+    { x: 0, y: -2, z: 0 }     // F
+  ];
 
   return (
     <div className="nixie-container">
@@ -31,11 +54,10 @@ const NixieTube = ({ value }) => {
             <stop offset="100%" style={{ stopColor: '#1a1a1a', stopOpacity: 0.9 }} />
           </linearGradient>
 
-          {/* Glow filter for the digit */}
+          {/* Subtle glow filter for active digit */}
           <filter id="nixieGlow">
-            <feGaussianBlur stdDeviation="4" result="coloredBlur" />
+            <feGaussianBlur stdDeviation="2" result="coloredBlur" />
             <feMerge>
-              <feMergeNode in="coloredBlur" />
               <feMergeNode in="coloredBlur" />
               <feMergeNode in="SourceGraphic" />
             </feMerge>
@@ -89,43 +111,75 @@ const NixieTube = ({ value }) => {
           opacity="0.8"
         />
 
-        {/* The illuminated digit */}
+        {/* Render all digit wires - first pass (behind active) */}
+        {allDigits.map((digit, index) => {
+          const offset = digitOffsets[index];
+          const isActive = digit === hexChar;
+
+          // Skip active digit in this pass (will draw it later)
+          if (isActive || offset.z >= 0) return null;
+
+          return (
+            <text
+              key={`back-${digit}`}
+              x={100 + offset.x}
+              y={165 + offset.y}
+              className="nixie-digit-wire"
+              fontSize="120"
+              fontWeight="normal"
+              textAnchor="middle"
+              fill="none"
+              stroke="#444444"
+              strokeWidth="0.8"
+              opacity="0.3"
+            >
+              {digit}
+            </text>
+          );
+        })}
+
+        {/* The illuminated digit (active wire) */}
         <text
-          x="100"
-          y="165"
-          className="nixie-digit"
+          x={100 + digitOffsets[value].x}
+          y={165 + digitOffsets[value].y}
+          className="nixie-digit-active"
           fontSize="120"
-          fontWeight="bold"
+          fontWeight="normal"
           textAnchor="middle"
-          fill="#ff4500"
+          fill="none"
+          stroke="#ff4500"
+          strokeWidth="1.5"
           filter="url(#nixieGlow)"
         >
           {hexChar}
         </text>
 
-        {/* Secondary ghost digits for depth (common in real Nixie tubes) */}
-        <text
-          x="100"
-          y="165"
-          fontSize="120"
-          fontWeight="bold"
-          textAnchor="middle"
-          fill="#ff6a33"
-          opacity="0.15"
-        >
-          {(value + 1) % 16 === 10 ? 'A' : ((value + 1) % 16).toString(16).toUpperCase()}
-        </text>
-        <text
-          x="100"
-          y="165"
-          fontSize="120"
-          fontWeight="bold"
-          textAnchor="middle"
-          fill="#ff6a33"
-          opacity="0.1"
-        >
-          {(value + 2) % 16 === 10 ? 'A' : ((value + 2) % 16).toString(16).toUpperCase()}
-        </text>
+        {/* Render remaining digit wires - second pass (in front of active) */}
+        {allDigits.map((digit, index) => {
+          const offset = digitOffsets[index];
+          const isActive = digit === hexChar;
+
+          // Skip active digit and digits already drawn
+          if (isActive || offset.z < 0) return null;
+
+          return (
+            <text
+              key={`front-${digit}`}
+              x={100 + offset.x}
+              y={165 + offset.y}
+              className="nixie-digit-wire"
+              fontSize="120"
+              fontWeight="normal"
+              textAnchor="middle"
+              fill="none"
+              stroke="#555555"
+              strokeWidth="0.8"
+              opacity="0.35"
+            >
+              {digit}
+            </text>
+          );
+        })}
 
         {/* Glass reflection highlight */}
         <ellipse

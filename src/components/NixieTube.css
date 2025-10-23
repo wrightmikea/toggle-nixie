@@ -9,19 +9,20 @@
 }
 
 .nixie-tube {
-  filter: drop-shadow(0 0 20px rgba(255, 69, 0, 0.3));
   animation: nixieFlicker 3s ease-in-out infinite;
 }
 
-.nixie-digit {
+.nixie-digit-active {
   font-family: 'Courier New', 'Consolas', monospace;
   text-shadow:
-    0 0 10px #ff4500,
-    0 0 20px #ff4500,
-    0 0 30px #ff4500,
-    0 0 40px #ff2200,
-    0 0 70px #ff2200;
+    0 0 3px #ff4500,
+    0 0 5px #ff4500,
+    0 0 8px #ff2200;
   animation: digitGlow 2s ease-in-out infinite alternate;
+}
+
+.nixie-digit-wire {
+  font-family: 'Courier New', 'Consolas', monospace;
 }
 
 .nixie-value-label {
@@ -42,12 +43,10 @@
 
 @keyframes digitGlow {
   0% {
-    opacity: 0.95;
-    filter: url(#nixieGlow) brightness(1);
+    opacity: 0.9;
   }
   100% {
     opacity: 1;
-    filter: url(#nixieGlow) brightness(1.1);
   }
 }
 
@@ -67,6 +66,9 @@
 }
 
 /* Add subtle animation on value change */
-.nixie-container:hover .nixie-tube {
-  filter: drop-shadow(0 0 25px rgba(255, 69, 0, 0.5));
+.nixie-container:hover .nixie-digit-active {
+  text-shadow:
+    0 0 4px #ff4500,
+    0 0 6px #ff4500,
+    0 0 10px #ff2200;
 }

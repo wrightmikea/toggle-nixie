@@ -51,13 +51,13 @@
   fill: #ffffff;
   stroke: #e2e8f0;
   stroke-width: 2;
-  transition: cx 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: cy 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
 }
 
 .toggle-knob-highlight {
   fill: rgba(255, 255, 255, 0.8);
-  transition: cx 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: cy 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   filter: blur(2px);
 }
 

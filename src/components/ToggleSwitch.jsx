@@ -17,14 +17,15 @@ const ToggleSwitch = ({ isOn, onToggle, value }) => {
 
   const handleClick = (side) => {
     // Only toggle if clicking on the opposite side
-    if ((side === 'left' && isOn) || (side === 'right' && !isOn)) {
+    // For vertical: top = on (1), bottom = off (0)
+    if ((side === 'bottom' && isOn) || (side === 'top' && !isOn)) {
       onToggle();
     }
   };
 
   const handleMouseEnter = (side) => {
     // Only show hover effect on the clickable (opposite) side
-    if ((side === 'left' && isOn) || (side === 'right' && !isOn)) {
+    if ((side === 'bottom' && isOn) || (side === 'top' && !isOn)) {
       setHoverSide(side);
     }
   };
@@ -37,90 +38,90 @@ const ToggleSwitch = ({ isOn, onToggle, value }) => {
     <div className="toggle-container">
       <div className="toggle-label">{value}</div>
       <svg
-        width="120"
-        height="60"
-        viewBox="0 0 120 60"
+        width="60"
+        height="120"
+        viewBox="0 0 60 120"
         className="toggle-switch"
         aria-label={`Toggle switch for value ${value}, currently ${isOn ? 'on' : 'off'}`}
         role="switch"
         aria-checked={isOn}
       >
-        {/* Switch background track */}
+        {/* Switch background track (vertical) */}
         <rect
-          x="10"
-          y="15"
-          width="100"
-          height="30"
+          x="15"
+          y="10"
+          width="30"
+          height="100"
           rx="15"
           className={`toggle-track ${isOn ? 'on' : 'off'}`}
         />
 
-        {/* Left clickable area (visible when switch is ON) */}
+        {/* Top clickable area (visible when switch is OFF) */}
         <rect
-          x="10"
-          y="15"
-          width="50"
-          height="30"
+          x="15"
+          y="10"
+          width="30"
+          height="50"
           rx="15"
-          className={`toggle-clickable-area ${hoverSide === 'left' ? 'hover' : ''}`}
-          onClick={() => handleClick('left')}
-          onMouseEnter={() => handleMouseEnter('left')}
-          onMouseLeave={handleMouseLeave}
-          style={{ cursor: isOn ? 'pointer' : 'default' }}
-        />
-
-        {/* Right clickable area (visible when switch is OFF) */}
-        <rect
-          x="60"
-          y="15"
-          width="50"
-          height="30"
-          rx="15"
-          className={`toggle-clickable-area ${hoverSide === 'right' ? 'hover' : ''}`}
-          onClick={() => handleClick('right')}
-          onMouseEnter={() => handleMouseEnter('right')}
+          className={`toggle-clickable-area ${hoverSide === 'top' ? 'hover' : ''}`}
+          onClick={() => handleClick('top')}
+          onMouseEnter={() => handleMouseEnter('top')}
           onMouseLeave={handleMouseLeave}
           style={{ cursor: !isOn ? 'pointer' : 'default' }}
         />
 
-        {/* OFF label */}
+        {/* Bottom clickable area (visible when switch is ON) */}
+        <rect
+          x="15"
+          y="60"
+          width="30"
+          height="50"
+          rx="15"
+          className={`toggle-clickable-area ${hoverSide === 'bottom' ? 'hover' : ''}`}
+          onClick={() => handleClick('bottom')}
+          onMouseEnter={() => handleMouseEnter('bottom')}
+          onMouseLeave={handleMouseLeave}
+          style={{ cursor: isOn ? 'pointer' : 'default' }}
+        />
+
+        {/* ON label (top) */}
         <text
           x="30"
           y="33"
           className="toggle-text"
-          fill={isOn ? '#666' : '#fff'}
-          fontSize="12"
-          fontWeight="bold"
-          textAnchor="middle"
-        >
-          OFF
-        </text>
-
-        {/* ON label */}
-        <text
-          x="90"
-          y="33"
-          className="toggle-text"
           fill={isOn ? '#fff' : '#666'}
-          fontSize="12"
+          fontSize="11"
           fontWeight="bold"
           textAnchor="middle"
         >
-          ON
+          1
         </text>
 
-        {/* Toggle knob/handle */}
+        {/* OFF label (bottom) */}
+        <text
+          x="30"
+          y="93"
+          className="toggle-text"
+          fill={isOn ? '#666' : '#fff'}
+          fontSize="11"
+          fontWeight="bold"
+          textAnchor="middle"
+        >
+          0
+        </text>
+
+        {/* Toggle knob/handle (moves vertically) */}
         <circle
-          cx={isOn ? 85 : 35}
-          cy="30"
+          cx="30"
+          cy={isOn ? 35 : 85}
           r="18"
           className="toggle-knob"
         />
 
         {/* Inner knob highlight for 3D effect */}
         <circle
-          cx={isOn ? 85 : 35}
-          cy="27"
+          cx="30"
+          cy={isOn ? 32 : 82}
           r="10"
           className="toggle-knob-highlight"
         />
