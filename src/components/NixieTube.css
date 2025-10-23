@@ -1,0 +1,72 @@
+.nixie-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  padding: 20px;
+  background: radial-gradient(circle, rgba(255, 69, 0, 0.1) 0%, transparent 70%);
+  border-radius: 20px;
+}
+
+.nixie-tube {
+  filter: drop-shadow(0 0 20px rgba(255, 69, 0, 0.3));
+  animation: nixieFlicker 3s ease-in-out infinite;
+}
+
+.nixie-digit {
+  font-family: 'Courier New', 'Consolas', monospace;
+  text-shadow:
+    0 0 10px #ff4500,
+    0 0 20px #ff4500,
+    0 0 30px #ff4500,
+    0 0 40px #ff2200,
+    0 0 70px #ff2200;
+  animation: digitGlow 2s ease-in-out infinite alternate;
+}
+
+.nixie-value-label {
+  font-size: 28px;
+  font-weight: bold;
+  color: #333;
+  font-family: 'Courier New', monospace;
+  text-align: center;
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+  border-radius: 10px;
+  color: white;
+  box-shadow:
+    0 4px 6px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  letter-spacing: 2px;
+}
+
+@keyframes digitGlow {
+  0% {
+    opacity: 0.95;
+    filter: url(#nixieGlow) brightness(1);
+  }
+  100% {
+    opacity: 1;
+    filter: url(#nixieGlow) brightness(1.1);
+  }
+}
+
+@keyframes nixieFlicker {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.98;
+  }
+  51% {
+    opacity: 1;
+  }
+  52% {
+    opacity: 0.99;
+  }
+}
+
+/* Add subtle animation on value change */
+.nixie-container:hover .nixie-tube {
+  filter: drop-shadow(0 0 25px rgba(255, 69, 0, 0.5));
+}
