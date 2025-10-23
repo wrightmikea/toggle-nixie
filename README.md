@@ -4,6 +4,14 @@ An interactive React Single Page Application (SPA) demonstrating graphical toggl
 
 ![Toggle Nixie Demo](https://img.shields.io/badge/React-18.3-blue) ![Vite](https://img.shields.io/badge/Vite-5.4-purple) ![Tests](https://img.shields.io/badge/Tests-30%20Passing-green)
 
+## Demo
+
+![Toggle Nixie Application Screenshot](./images/demo-screenshot.png)
+
+*Interactive demo showing vertical toggle switches (8, 4, 2, 1) controlling a wire-based Nixie tube display. Binary 1010 = Decimal 10 = Hex A*
+
+**[Try the Live Demo →](https://wrightmikea.github.io/toggle-nixie/)**
+
 ## Overview
 
 This proof-of-concept application showcases:
