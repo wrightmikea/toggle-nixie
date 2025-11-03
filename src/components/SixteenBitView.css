@@ -50,21 +50,22 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Toggle Switches Section - 15% viewport height, 75% viewport width */
+/* Toggle Switches Section - 15% viewport height, 60% viewport width */
 .switches-section {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 18vh;
-  width: 75vw;
+  width: 60vw;
   margin-top: 2vh;
+  padding: 0 5vw;
 }
 
 .switches-row {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  gap: 0.2vw;
+  gap: 0.1vw;
   height: 100%;
 }
 
@@ -72,7 +73,7 @@
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  gap: 0.1vw;
+  gap: 0.05vw;
   height: 100%;
 }
 
