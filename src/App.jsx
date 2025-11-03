@@ -4,6 +4,12 @@ import SixteenBitView from './components/SixteenBitView';
 import ModeControl from './components/ModeControl';
 import './App.css';
 
+// Build information injected at build time
+/* global __BUILD_SHA__, __BUILD_TIMESTAMP__, __BUILD_HOST__ */
+const BUILD_SHA = typeof __BUILD_SHA__ !== 'undefined' ? __BUILD_SHA__ : 'dev';
+const BUILD_TIMESTAMP = typeof __BUILD_TIMESTAMP__ !== 'undefined' ? __BUILD_TIMESTAMP__ : new Date().toISOString();
+const BUILD_HOST = typeof __BUILD_HOST__ !== 'undefined' ? __BUILD_HOST__ : 'localhost';
+
 /**
  * Main App Component
  *
@@ -59,6 +65,9 @@ function App() {
           >
             View Source
           </a>
+        </p>
+        <p className="build-info">
+          Build: {BUILD_HOST} | {BUILD_SHA} | {new Date(BUILD_TIMESTAMP).toLocaleString()}
         </p>
         <p className="copyright">
           Copyright &copy; 2025 - Michael A Wright | MIT License

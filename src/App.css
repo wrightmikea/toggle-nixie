@@ -113,6 +113,12 @@
   text-decoration: underline;
 }
 
+.build-info {
+  font-size: 0.65rem;
+  color: #9ca3af;
+  font-family: 'Courier New', monospace;
+}
+
 .copyright {
   font-size: 0.7rem;
   color: #cbd5e0;

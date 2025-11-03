@@ -1,8 +1,7 @@
 .mode-control {
   position: fixed;
-  left: 20px;
-  top: 50%;
-  transform: translateY(-50%);
+  left: 15px;
+  top: 20vh;
   background: rgba(255, 255, 255, 0.95);
   border-radius: 12px;
   padding: 15px;
