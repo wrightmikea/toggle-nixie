@@ -46,7 +46,7 @@
   font-weight: bold;
   color: #2d3748;
   text-align: center;
-  margin-top: 1vh;
+  margin-top: 3vh;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -86,10 +86,14 @@
 .switch-number {
   font-size: 0.9rem;
   font-weight: bold;
-  color: #2d3748;
+  color: white;
+  background: linear-gradient(135deg, #6b7280 0%, #9ca3af 100%);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   text-align: center;
-  min-width: 20px;
+  min-width: 24px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 /* Scale down the toggle switches to fit */

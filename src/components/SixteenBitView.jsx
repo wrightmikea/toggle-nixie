@@ -100,7 +100,8 @@ function SixteenBitView() {
           ))}
         </div>
         <div className="hex-label">
-          {getHexString()} (Hexadecimal) {getDecimalValue()} (Decimal)
+          0x{getHexString()} = {getDecimalValue()}
+          <sub>10</sub>
         </div>
       </section>
 

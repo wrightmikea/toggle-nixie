@@ -14,32 +14,35 @@
 .app-header {
   background: rgba(255, 255, 255, 0.95);
   padding: 8px 20px;
-  text-align: center;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   max-height: 7vh;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .app-header h1 {
   font-size: 1.4rem;
   color: #2d3748;
-  margin-bottom: 2px;
+  margin: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-align: left;
 }
 
 .subtitle {
   font-size: 0.8rem;
   color: #4a5568;
   font-style: italic;
+  text-align: right;
+  margin: 0;
 }
 
 .tab-navigation {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 15px;
-  padding: 10px;
+  padding: 10px 20px;
   background: rgba(255, 255, 255, 0.85);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   max-height: 8vh;
@@ -89,19 +92,19 @@
 .app-footer {
   background: rgba(0, 0, 0, 0.8);
   color: white;
-  padding: 20px;
+  padding: 10px;
   text-align: center;
-  font-size: 0.9rem;
+  font-size: 0.75rem;
 }
 
 .app-footer p {
-  margin: 5px 0;
+  margin: 3px 0;
 }
 
 .app-footer a {
   color: #90cdf4;
   text-decoration: none;
-  margin-left: 10px;
+  margin-left: 8px;
   transition: color 0.3s ease;
 }
 
@@ -111,9 +114,9 @@
 }
 
 .copyright {
-  font-size: 0.85rem;
+  font-size: 0.7rem;
   color: #cbd5e0;
-  margin-top: 10px;
+  margin-top: 5px;
 }
 
 /* Responsive design */
