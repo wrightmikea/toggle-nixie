@@ -8,8 +8,9 @@ import './NixieTube.css';
  *
  * @param {Object} props
  * @param {number} props.value - Numeric value (0-15) to display as hex
+ * @param {boolean} props.showLabel - Whether to show the hex label below (default: true)
  */
-const NixieTube = ({ value }) => {
+const NixieTube = ({ value, showLabel = true }) => {
   // Convert numeric value to hex character (0-9, A-F)
   const hexChar = value.toString(16).toUpperCase();
 
@@ -203,9 +204,11 @@ const NixieTube = ({ value }) => {
       </svg>
 
       {/* Display label */}
-      <div className="nixie-value-label">
-        Hex: {hexChar}
-      </div>
+      {showLabel && (
+        <div className="nixie-value-label">
+          Hex: {hexChar}
+        </div>
+      )}
     </div>
   );
 };

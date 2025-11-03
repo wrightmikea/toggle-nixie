@@ -1,52 +1,17 @@
 import { useState } from 'react';
-import ToggleSwitch from './components/ToggleSwitch';
-import NixieTube from './components/NixieTube';
+import FourBitView from './components/FourBitView';
+import SixteenBitView from './components/SixteenBitView';
 import './App.css';
 
 /**
  * Main App Component
  *
- * Demonstrates interactive toggle switches that control a binary value
- * displayed as a hexadecimal digit in a Nixie tube display.
- *
- * The four switches represent binary values: 8, 4, 2, 1
- * Their combined state determines the hex value (0-F) shown in the Nixie tube.
+ * Provides a tabbed interface to switch between two visualizations:
+ * - 4-bit mode: 4 toggle switches controlling 1 Nixie tube (0-F)
+ * - 16-bit mode: 16 toggle switches controlling 4 Nixie tubes (0000-FFFF)
  */
 function App() {
-  // State for each toggle switch (representing binary digits)
-  const [switches, setSwitches] = useState({
-    8: false,
-    4: false,
-    2: false,
-    1: false
-  });
-
-  /**
-   * Toggle a specific switch
-   * @param {number} value - The binary value of the switch (8, 4, 2, or 1)
-   */
-  const toggleSwitch = (value) => {
-    setSwitches(prev => ({
-      ...prev,
-      [value]: !prev[value]
-    }));
-  };
-
-  /**
-   * Calculate the hexadecimal value from switch states
-   * Derived state: sum of (switch_state × switch_value) for all switches
-   * @returns {number} Value from 0 to 15
-   */
-  const getHexValue = () => {
-    return (
-      (switches[8] ? 8 : 0) +
-      (switches[4] ? 4 : 0) +
-      (switches[2] ? 2 : 0) +
-      (switches[1] ? 1 : 0)
-    );
-  };
-
-  const hexValue = getHexValue();
+  const [activeTab, setActiveTab] = useState('4-bit');
 
   return (
     <div className="app">
@@ -57,54 +22,23 @@ function App() {
         </p>
       </header>
 
+      <nav className="tab-navigation">
+        <button
+          className={`tab-button ${activeTab === '4-bit' ? 'active' : ''}`}
+          onClick={() => setActiveTab('4-bit')}
+        >
+          4-Bit Mode (Single Digit)
+        </button>
+        <button
+          className={`tab-button ${activeTab === '16-bit' ? 'active' : ''}`}
+          onClick={() => setActiveTab('16-bit')}
+        >
+          16-Bit Mode (Four Digits)
+        </button>
+      </nav>
+
       <main className="app-main">
-        <section className="controls-section">
-          <h2>Binary Input Controls</h2>
-          <p className="instruction">
-            Click the opposite side of each toggle to change its state
-          </p>
-
-          <div className="toggles-container">
-            {[8, 4, 2, 1].map((value) => (
-              <ToggleSwitch
-                key={value}
-                value={value}
-                isOn={switches[value]}
-                onToggle={() => toggleSwitch(value)}
-              />
-            ))}
-          </div>
-
-          <div className="binary-display">
-            <div className="binary-label">Binary:</div>
-            <div className="binary-value">
-              <span className={switches[8] ? 'bit-on' : 'bit-off'}>
-                {switches[8] ? '1' : '0'}
-              </span>
-              <span className={switches[4] ? 'bit-on' : 'bit-off'}>
-                {switches[4] ? '1' : '0'}
-              </span>
-              <span className={switches[2] ? 'bit-on' : 'bit-off'}>
-                {switches[2] ? '1' : '0'}
-              </span>
-              <span className={switches[1] ? 'bit-on' : 'bit-off'}>
-                {switches[1] ? '1' : '0'}
-              </span>
-            </div>
-            <div className="decimal-display">
-              Decimal: <span className="decimal-value">{hexValue}</span>
-            </div>
-          </div>
-        </section>
-
-        <section className="display-section">
-          <h2>Hexadecimal Display</h2>
-          <p className="display-info">
-            Vintage Nixie Tube showing hex value (0-F)
-          </p>
-
-          <NixieTube value={hexValue} />
-        </section>
+        {activeTab === '4-bit' ? <FourBitView /> : <SixteenBitView />}
       </main>
 
       <footer className="app-footer">

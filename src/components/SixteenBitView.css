@@ -1,0 +1,196 @@
+.sixteen-bit-view {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 2vh 0;
+  gap: 5vh;
+}
+
+/* Nixie Tubes Section - 25% viewport height, 50% viewport width */
+.nixie-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 25vh;
+  width: 50vw;
+  min-width: 600px;
+}
+
+.nixie-tubes-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1vw;
+  height: 20vh;
+}
+
+.nixie-tube-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+/* Scale down the Nixie tubes */
+.nixie-tube-wrapper > div {
+  transform: scale(0.7);
+  transform-origin: center center;
+}
+
+.hex-label {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #2d3748;
+  text-align: center;
+  margin-top: 1vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Toggle Switches Section - 15% viewport height, 75% viewport width */
+.switches-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 18vh;
+  width: 75vw;
+  margin-top: 2vh;
+}
+
+.switches-row {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 0.2vw;
+  height: 100%;
+}
+
+.nibble-switches {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 0.1vw;
+  height: 100%;
+}
+
+.switch-with-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.switch-number {
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #2d3748;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center;
+  min-width: 20px;
+}
+
+/* Scale down the toggle switches to fit */
+.switch-with-label > div:last-child {
+  transform: scale(0.55);
+  transform-origin: center top;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1400px) {
+  .nixie-section {
+    min-width: 500px;
+    width: 60vw;
+  }
+
+  .switches-section {
+    width: 85vw;
+  }
+
+  .switch-with-label > div:last-child {
+    transform: scale(0.48);
+  }
+
+  .switch-number {
+    font-size: 0.8rem;
+  }
+
+  .nixie-tube-wrapper > div {
+    transform: scale(0.6);
+  }
+}
+
+@media (max-width: 1024px) {
+  .nixie-section {
+    min-width: 400px;
+    width: 70vw;
+  }
+
+  .switches-section {
+    width: 90vw;
+  }
+
+  .switch-with-label > div:last-child {
+    transform: scale(0.42);
+  }
+
+  .switch-number {
+    font-size: 0.75rem;
+  }
+
+  .nixie-tube-wrapper > div {
+    transform: scale(0.5);
+  }
+
+  .hex-label {
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .sixteen-bit-view {
+    gap: 2vh;
+  }
+
+  .nixie-section {
+    min-width: 300px;
+    width: 90vw;
+    height: 20vh;
+  }
+
+  .nixie-tubes-row {
+    height: 15vh;
+    gap: 2vw;
+  }
+
+  .switches-section {
+    width: 98vw;
+    height: 20vh;
+  }
+
+  .switch-with-label > div:last-child {
+    transform: scale(0.4);
+  }
+
+  .switch-number {
+    font-size: 0.7rem;
+  }
+
+  .nibble-switches {
+    gap: 0.2vw;
+  }
+
+  .switches-row {
+    gap: 0.2vw;
+  }
+
+  .nixie-tube-wrapper > div {
+    transform: scale(0.4);
+  }
+
+  .hex-label {
+    font-size: 1.2rem;
+  }
+}

@@ -13,116 +13,77 @@
 
 .app-header {
   background: rgba(255, 255, 255, 0.95);
-  padding: 15px 20px;
+  padding: 8px 20px;
   text-align: center;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-height: 7vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .app-header h1 {
-  font-size: 1.8rem;
+  font-size: 1.4rem;
   color: #2d3748;
-  margin-bottom: 5px;
+  margin-bottom: 2px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .subtitle {
-  font-size: 0.95rem;
+  font-size: 0.8rem;
   color: #4a5568;
   font-style: italic;
+}
+
+.tab-navigation {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-height: 8vh;
+}
+
+.tab-button {
+  padding: 8px 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #4a5568;
+  background: rgba(255, 255, 255, 0.9);
+  border: 2px solid #cbd5e0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.tab-button:hover {
+  background: rgba(102, 126, 234, 0.1);
+  border-color: #667eea;
+  color: #2d3748;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.tab-button.active {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-color: #667eea;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.tab-button.active:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(102, 126, 234, 0.5);
 }
 
 .app-main {
   flex: 1;
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
   align-items: flex-start;
   padding: 40px 20px;
-  gap: 60px;
-}
-
-.controls-section,
-.display-section {
-  background: rgba(255, 255, 255, 0.95);
-  border-radius: 20px;
-  padding: 30px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  max-width: 600px;
-}
-
-.controls-section h2,
-.display-section h2 {
-  font-size: 1.8rem;
-  color: #2d3748;
-  margin-bottom: 10px;
-  text-align: center;
-}
-
-.instruction,
-.display-info {
-  text-align: center;
-  color: #718096;
-  margin-bottom: 25px;
-  font-size: 0.95rem;
-}
-
-.toggles-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 30px;
-}
-
-.binary-display {
-  text-align: center;
-  padding: 20px;
-  background: linear-gradient(135deg, #f6f8fb 0%, #e9ecef 100%);
-  border-radius: 15px;
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.binary-label {
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: #4a5568;
-  margin-bottom: 10px;
-}
-
-.binary-value {
-  font-family: 'Courier New', monospace;
-  font-size: 2.5rem;
-  font-weight: bold;
-  letter-spacing: 15px;
-  margin-bottom: 15px;
-}
-
-.bit-on {
-  color: #48bb78;
-  text-shadow: 0 0 10px rgba(72, 187, 120, 0.5);
-}
-
-.bit-off {
-  color: #cbd5e0;
-}
-
-.decimal-display {
-  font-size: 1.3rem;
-  color: #2d3748;
-  margin-top: 15px;
-}
-
-.decimal-value {
-  font-weight: bold;
-  color: #667eea;
-  font-size: 1.5rem;
-}
-
-.display-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 .app-footer {
@@ -158,28 +119,36 @@
 /* Responsive design */
 @media (max-width: 768px) {
   .app-header h1 {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
   }
 
   .subtitle {
-    font-size: 1rem;
+    font-size: 0.85rem;
+  }
+
+  .tab-navigation {
+    flex-direction: column;
+    gap: 10px;
+    padding: 15px;
+  }
+
+  .tab-button {
+    padding: 10px 20px;
+    font-size: 0.9rem;
   }
 
   .app-main {
-    flex-direction: column;
-    align-items: center;
-    gap: 30px;
     padding: 20px 10px;
   }
+}
 
-  .controls-section,
-  .display-section {
-    max-width: 100%;
-    width: 100%;
+@media (max-width: 480px) {
+  .app-header h1 {
+    font-size: 1.3rem;
   }
 
-  .binary-value {
-    font-size: 2rem;
-    letter-spacing: 10px;
+  .tab-button {
+    padding: 8px 16px;
+    font-size: 0.85rem;
   }
 }
