@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ToggleSwitch from './ToggleSwitch';
 import NixieTube from './NixieTube';
 import './FourBitView.css';
@@ -8,8 +8,11 @@ import './FourBitView.css';
  *
  * Displays 4 toggle switches representing binary values (8, 4, 2, 1)
  * and a single Nixie tube showing the hexadecimal result (0-F).
+ *
+ * @param {Object} props
+ * @param {string} props.mode - Current mode ('interactive' or 'autoincrement')
  */
-function FourBitView() {
+function FourBitView({ mode = 'interactive' }) {
   // State for each toggle switch (representing binary digits)
   const [switches, setSwitches] = useState({
     8: false,
@@ -44,6 +47,34 @@ function FourBitView() {
 
   const hexValue = getHexValue();
 
+  /**
+   * Autoincrement effect - counts from 0 to 15, then wraps
+   */
+  useEffect(() => {
+    if (mode !== 'autoincrement') return;
+
+    const interval = setInterval(() => {
+      setSwitches(prev => {
+        const currentValue =
+          (prev[8] ? 8 : 0) +
+          (prev[4] ? 4 : 0) +
+          (prev[2] ? 2 : 0) +
+          (prev[1] ? 1 : 0);
+
+        const nextValue = (currentValue + 1) % 16;
+
+        return {
+          8: (nextValue & 8) !== 0,
+          4: (nextValue & 4) !== 0,
+          2: (nextValue & 2) !== 0,
+          1: (nextValue & 1) !== 0
+        };
+      });
+    }, 500); // Increment every 500ms
+
+    return () => clearInterval(interval);
+  }, [mode]);
+
   return (
     <div className="view-content">
       <section className="controls-section">
@@ -58,7 +89,7 @@ function FourBitView() {
               key={value}
               value={value}
               isOn={switches[value]}
-              onToggle={() => toggleSwitch(value)}
+              onToggle={() => mode === 'interactive' && toggleSwitch(value)}
             />
           ))}
         </div>

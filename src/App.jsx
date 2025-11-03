@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import FourBitView from './components/FourBitView';
 import SixteenBitView from './components/SixteenBitView';
+import ModeControl from './components/ModeControl';
 import './App.css';
 
 /**
@@ -9,9 +10,14 @@ import './App.css';
  * Provides a tabbed interface to switch between two visualizations:
  * - 4-bit mode: 4 toggle switches controlling 1 Nixie tube (0-F)
  * - 16-bit mode: 16 toggle switches controlling 4 Nixie tubes (0000-FFFF)
+ *
+ * Supports two modes:
+ * - Interactive: Manual toggle control (default)
+ * - Autoincrement: Animated counting from 0 to max value
  */
 function App() {
   const [activeTab, setActiveTab] = useState('4-bit');
+  const [mode, setMode] = useState('interactive');
 
   return (
     <div className="app">
@@ -37,8 +43,10 @@ function App() {
         </button>
       </nav>
 
+      <ModeControl mode={mode} onModeChange={setMode} />
+
       <main className="app-main">
-        {activeTab === '4-bit' ? <FourBitView /> : <SixteenBitView />}
+        {activeTab === '4-bit' ? <FourBitView mode={mode} /> : <SixteenBitView mode={mode} />}
       </main>
 
       <footer className="app-footer">

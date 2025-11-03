@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ToggleSwitch from './ToggleSwitch';
 import NixieTube from './NixieTube';
 import './SixteenBitView.css';
@@ -9,8 +9,11 @@ import './SixteenBitView.css';
  * Displays 16 toggle switches organized in 4 groups of 4,
  * with each group controlling one Nixie tube.
  * Shows hexadecimal values from 0000 to FFFF.
+ *
+ * @param {Object} props
+ * @param {string} props.mode - Current mode ('interactive' or 'autoincrement')
  */
-function SixteenBitView() {
+function SixteenBitView({ mode = 'interactive' }) {
   // State for 16 switches organized in 4 nibbles (4-bit groups)
   // nibble0 = leftmost (most significant), nibble3 = rightmost (least significant)
   const [switches, setSwitches] = useState({
@@ -88,6 +91,52 @@ function SixteenBitView() {
       .join('');
   };
 
+  /**
+   * Autoincrement effect - counts from 0 to 65535, then wraps
+   */
+  useEffect(() => {
+    if (mode !== 'autoincrement') return;
+
+    const interval = setInterval(() => {
+      setSwitches(prev => {
+        const currentValue = parseInt(getBinaryString(), 2);
+        const nextValue = (currentValue + 1) % 65536;
+
+        // Convert nextValue to binary and split into nibbles
+        const binary = nextValue.toString(2).padStart(16, '0');
+
+        return {
+          nibble0: {
+            8: binary[0] === '1',
+            4: binary[1] === '1',
+            2: binary[2] === '1',
+            1: binary[3] === '1'
+          },
+          nibble1: {
+            8: binary[4] === '1',
+            4: binary[5] === '1',
+            2: binary[6] === '1',
+            1: binary[7] === '1'
+          },
+          nibble2: {
+            8: binary[8] === '1',
+            4: binary[9] === '1',
+            2: binary[10] === '1',
+            1: binary[11] === '1'
+          },
+          nibble3: {
+            8: binary[12] === '1',
+            4: binary[13] === '1',
+            2: binary[14] === '1',
+            1: binary[15] === '1'
+          }
+        };
+      });
+    }, 500); // Increment every 500ms
+
+    return () => clearInterval(interval);
+  }, [mode]);
+
   return (
     <div className="sixteen-bit-view">
       {/* Nixie Tubes Display Section */}
@@ -118,7 +167,7 @@ function SixteenBitView() {
                     <ToggleSwitch
                       value={value}
                       isOn={switches[nibble][value]}
-                      onToggle={() => toggleSwitch(nibble, value)}
+                      onToggle={() => mode === 'interactive' && toggleSwitch(nibble, value)}
                     />
                   </div>
                 );
