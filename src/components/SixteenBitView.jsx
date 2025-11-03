@@ -99,7 +99,17 @@ function SixteenBitView({ mode = 'interactive' }) {
 
     const interval = setInterval(() => {
       setSwitches(prev => {
-        const currentValue = parseInt(getBinaryString(), 2);
+        // Calculate current value from prev state
+        let binaryStr = '';
+        ['nibble0', 'nibble1', 'nibble2', 'nibble3'].forEach(nibble => {
+          const n = prev[nibble];
+          binaryStr += (n[8] ? '1' : '0');
+          binaryStr += (n[4] ? '1' : '0');
+          binaryStr += (n[2] ? '1' : '0');
+          binaryStr += (n[1] ? '1' : '0');
+        });
+
+        const currentValue = parseInt(binaryStr, 2);
         const nextValue = (currentValue + 1) % 65536;
 
         // Convert nextValue to binary and split into nibbles
