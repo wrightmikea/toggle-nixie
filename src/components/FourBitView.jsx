@@ -10,7 +10,7 @@ import './FourBitView.css';
  * and a single Nixie tube showing the hexadecimal result (0-F).
  *
  * @param {Object} props
- * @param {string} props.mode - Current mode ('interactive' or 'autoincrement')
+ * @param {string} props.mode - Current mode ('interactive', 'autoincrement', or 'autodecrement')
  */
 function FourBitView({ mode = 'interactive' }) {
   // State for each toggle switch (representing binary digits)
@@ -48,10 +48,12 @@ function FourBitView({ mode = 'interactive' }) {
   const hexValue = getHexValue();
 
   /**
-   * Autoincrement effect - counts from 0 to 15, then wraps
+   * Autoincrement/Autodecrement effect
+   * - Autoincrement: counts from 0 to 15, then wraps to 0
+   * - Autodecrement: counts from 15 to 0, then wraps to 15
    */
   useEffect(() => {
-    if (mode !== 'autoincrement') return;
+    if (mode !== 'autoincrement' && mode !== 'autodecrement') return;
 
     const interval = setInterval(() => {
       setSwitches(prev => {
@@ -61,7 +63,12 @@ function FourBitView({ mode = 'interactive' }) {
           (prev[2] ? 2 : 0) +
           (prev[1] ? 1 : 0);
 
-        const nextValue = (currentValue + 1) % 16;
+        let nextValue;
+        if (mode === 'autoincrement') {
+          nextValue = (currentValue + 1) % 16;
+        } else { // autodecrement
+          nextValue = (currentValue - 1 + 16) % 16;
+        }
 
         return {
           8: (nextValue & 8) !== 0,
@@ -70,7 +77,7 @@ function FourBitView({ mode = 'interactive' }) {
           1: (nextValue & 1) !== 0
         };
       });
-    }, 500); // Increment every 500ms
+    }, 500); // Update every 500ms
 
     return () => clearInterval(interval);
   }, [mode]);

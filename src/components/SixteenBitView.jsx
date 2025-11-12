@@ -11,7 +11,7 @@ import './SixteenBitView.css';
  * Shows hexadecimal values from 0000 to FFFF.
  *
  * @param {Object} props
- * @param {string} props.mode - Current mode ('interactive' or 'autoincrement')
+ * @param {string} props.mode - Current mode ('interactive', 'autoincrement', or 'autodecrement')
  */
 function SixteenBitView({ mode = 'interactive' }) {
   // State for 16 switches organized in 4 nibbles (4-bit groups)
@@ -92,10 +92,12 @@ function SixteenBitView({ mode = 'interactive' }) {
   };
 
   /**
-   * Autoincrement effect - counts from 0 to 65535, then wraps
+   * Autoincrement/Autodecrement effect
+   * - Autoincrement: counts from 0 to 65535, then wraps to 0
+   * - Autodecrement: counts from 65535 to 0, then wraps to 65535
    */
   useEffect(() => {
-    if (mode !== 'autoincrement') return;
+    if (mode !== 'autoincrement' && mode !== 'autodecrement') return;
 
     const interval = setInterval(() => {
       setSwitches(prev => {
@@ -110,7 +112,12 @@ function SixteenBitView({ mode = 'interactive' }) {
         });
 
         const currentValue = parseInt(binaryStr, 2);
-        const nextValue = (currentValue + 1) % 65536;
+        let nextValue;
+        if (mode === 'autoincrement') {
+          nextValue = (currentValue + 1) % 65536;
+        } else { // autodecrement
+          nextValue = (currentValue - 1 + 65536) % 65536;
+        }
 
         // Convert nextValue to binary and split into nibbles
         const binary = nextValue.toString(2).padStart(16, '0');
@@ -142,7 +149,7 @@ function SixteenBitView({ mode = 'interactive' }) {
           }
         };
       });
-    }, 500); // Increment every 500ms
+    }, 500); // Update every 500ms
 
     return () => clearInterval(interval);
   }, [mode]);
